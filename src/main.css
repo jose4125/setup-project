@@ -1,0 +1,15 @@
+@import 'test.css';
+
+:root {
+  --mainColor: red;
+}
+
+body {
+  color: var(--mainColor);
+  background: #444;
+
+  & h1 {
+    text-decoration: underline;
+    font-size: 20px;
+  }
+}
