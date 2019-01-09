@@ -4,10 +4,11 @@ module.exports = {
       stage: 3,
       features: {
         'nesting-rules': true,
-        'color-mod-function': { unresolved: 'warn' }
-      }
+        'color-mod-function': { unresolved: 'warn' },
+      },
     },
     'rucksack-css': {},
-    'postcss-pxtorem': {}
-  }
+    'postcss-pxtorem': {},
+    autoprefixer: {},
+  },
 };

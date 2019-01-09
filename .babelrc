@@ -1,13 +1,15 @@
 {
-  "presets":[
+  "presets": [
     [
       "@babel/preset-env",
       {
         "useBuiltIns": "usage",
-        "debug": true,
-        "modules": false
+        "debug": true
       }
     ]
   ],
-  "plugins": ["@babel/plugin-transform-runtime"]
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-class-properties"
+  ]
 }
