@@ -1,10 +1,4 @@
-@import 'test.css';
-
-:root {
-  --mainColor: #FF0000;
-}
-
-body {
+div {
   background: #444;
   color: var(--mainColor);
 
@@ -13,5 +7,13 @@ body {
     display: flex;
     font-size: 20px;
     text-decoration: underline;
+
+    & p {
+      color: #FFFFFF;
+
+      & div {
+        color: #000000;
+      }
+    }
   }
 }
