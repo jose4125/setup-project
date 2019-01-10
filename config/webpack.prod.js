@@ -1,26 +1,31 @@
 const path = require('path');
 const plugins = require('./webpack.plugins');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
   context: path.join(__dirname, '../'),
   entry: {
-    main: ['webpack-hot-middleware/client?reload=true', './src/main.js'],
+    main: './src/main.js',
   },
-  mode: 'development',
+  mode: 'production',
   output: {
     filename: '[name]-bundle.js',
     path: path.resolve(__dirname, '../dist'),
     publicPath: '/',
   },
-  devServer: {
-    contentBase: 'dist',
-    overlay: true,
-    hot: true,
-    stats: {
-      colors: true,
+  optimization: {
+    splitChunks: {
+      automaticNameDelimiter: '-',
+      cacheGroups: {
+        vendor: {
+          name: 'vendor',
+          test: /[\\/]node_modules[\\/]/,
+          chunks: 'initial',
+          minChunks: 2,
+        },
+      },
     },
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {
@@ -36,7 +41,7 @@ module.exports = {
         test: /\.css$/,
         use: [
           {
-            loader: 'style-loader',
+            loader: MiniCssExtractPlugin.loader,
           },
           {
             loader: 'css-loader',
@@ -44,7 +49,6 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              sourceMap: 'inline',
               config: {
                 path: path.resolve(__dirname, './postcss.config.js'),
               },
@@ -78,9 +82,13 @@ module.exports = {
   },
   plugins: [
     plugins.StyleLintPlugin,
-    plugins.HotModuleReplacementPlugin,
-    plugins.DefineDevPlugin,
-    plugins.HtmlDevWebpackPlugin,
+    plugins.HtmlProdWebpackPlugin,
+    plugins.MiniCssExtractPlugin,
+    plugins.OptimizeCssAssetsPlugin,
+    plugins.DefineProdPlugin,
+    plugins.MinifyPlugin,
+    plugins.CompressionPlugin,
+    plugins.BrotliPlugin,
     plugins.CleanWebpackPlugin,
   ],
 };
