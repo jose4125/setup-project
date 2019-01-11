@@ -1,5 +1,7 @@
+import 'react-hot-loader/patch';
 import './index.html';
 import './main.css';
+import './app';
 
 let a = async args => {
   const { a, b } = args;
